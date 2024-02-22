@@ -1,8 +1,5 @@
 import cors from 'cors'
 import express from 'express'
-import path from 'path'
-import favicon from 'serve-favicon'
-import { fileURLToPath } from 'url'
 
 import { fileConfigurations } from './config/index.js'
 
@@ -19,14 +16,10 @@ const setCustomHeader = function (req, res, next) {
     next()
 }
 app.all('*', setCustomHeader)
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-globalThis.__basedir = __dirname
 
 const { ftpFolder } = fileConfigurations
 
 app.use(express.static(`${ftpFolder}`))
-app.use(favicon(path.join(process.cwd(), 'favicon.png')))
 
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: true }))

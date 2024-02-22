@@ -6,30 +6,43 @@ export const analyzeTextFromFile = (filePath) => {
 
         return analyzeText(text);
     } catch (err) {
-        console.error('Error reading file:', err);
-        return null;
+        if (err.code === 'ENOENT') {
+            console.error('Error reading file:', err);
+            return null;
+        }
+        throw err;
     }
 };
 
 const analyzeText = (text) => {
-    const words = text.split(/\s+/);
+    let words = 0;
+    let wordCount = 0;
+    let characterCount = 0;
+    let sentenceCount = 0;
+    let paragraphCount = 0;
+    let longestWord = '';
+    let longestWordsInParagraphs = []
 
-    const wordCount = words.length;
+    if (text && text.length > 0) {
+        words = text.split(/\s+/);
 
-    const characterCount = text.replace(/\s+/g, '').length;
+        wordCount = words.length;
 
-    // assumes sentences end with '.', '!', or '?'
-    const sentenceCount = text.split(/[.!?]+/).length - 1;
+        characterCount = text.replace(/\s+/g, '').length;
 
-    // assumes paragraphs are separated by double newline characters
-    const paragraphCount = text.split(/\n\s*\n/).length;
+        // assumes sentences end with '.', '!', or '?'
+        sentenceCount = text.split(/[.!?]+/).length - 1;
 
-    const longestWord = words.reduce((longest, current) => current.length > longest.length ? current : longest, '');
+        // assumes paragraphs are separated by double newline characters
+        paragraphCount = text.split(/\n\s*\n/).length;
 
-    const longestWordsInParagraphs = text.split(/\n\s*\n/).map(paragraph => {
-        const wordsInParagraph = paragraph.split(/\s+/);
-        return wordsInParagraph.reduce((longest, current) => current.length > longest.length ? current : longest, '');
-    });
+        longestWord = words.reduce((longest, current) => current.length > longest.length ? current : longest, '');
+
+        longestWordsInParagraphs = text.split(/\n\s*\n/).map(paragraph => {
+            const wordsInParagraph = paragraph.split(/\s+/);
+            return wordsInParagraph.reduce((longest, current) => current.length > longest.length ? current : longest, '');
+        });
+    }
 
     return {
         wordCount,
