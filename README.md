@@ -8,12 +8,12 @@ Text Analyzer is a Node.js application that analyzes text files and provides var
 
    ```bash
    git clone https://github.com/your-username/text-analyzer.git
-   
+   ```
 2. Navigate to the project directory:
 
 ```bash
 cd text-analyzer
-
+```
 Install dependencies:
 
 bash
