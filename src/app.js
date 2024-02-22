@@ -6,6 +6,8 @@ import { fileURLToPath } from 'url'
 
 import { fileConfigurations } from './config/index.js'
 
+import textRoutes from './routes/textRoutes.js';
+
 const app = express()
 app.use(cors())
 const setCustomHeader = function (req, res, next) {
@@ -28,6 +30,7 @@ app.use(favicon(path.join(process.cwd(), 'favicon.png')))
 
 app.use(express.json({ limit: '50mb' }))
 app.use(express.urlencoded({ limit: '50mb', extended: true }))
+app.use('/api/text', textRoutes);
 
 app.get('/', async (req, res) => {
     res.status(200).json({ title: 'textAnalyzer API' })
