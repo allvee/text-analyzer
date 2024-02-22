@@ -20,7 +20,7 @@ cd text-analyzer
 npm install
 ```
 
-Usage
+## Usage
 1. Place the text files you want to analyze in the input directory.
 
 2. Run the application:
@@ -35,8 +35,8 @@ Character count: GET /api/text/character-count
 Sentence count: GET /api/text/sentence-count
 Paragraph count: GET /api/text/paragraph-count
 Longest words in paragraphs: GET /api/text/longest-words-in-paragraphs
-Development
-Running Tests
+## Development
+### Running Tests
 Run unit tests:
 
 ```bash
@@ -53,14 +53,14 @@ src/: Contains the application source code.
 input/: Directory for input text files to be analyzed.
 tests/: Contains unit and integration tests.
 
-Dependencies
+### Dependencies
 Express.js: For building the RESTful API.
 Jest: Testing framework.
 Supertest: HTTP assertions for integration testing.
 Babel: For transpiling ES6 code.
 
-Contributing
+## Contributing
 Contributions are welcome! Please fork the repository and submit a pull request.
 
-License
+## License
 This project is licensed under the MIT License - see the LICENSE file for details.
